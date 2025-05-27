@@ -1,0 +1,27 @@
+x-logging:
+  &json-logging
+  driver: json-file
+  options:
+    max-size: "1m"
+    max-file: "3"
+
+services:
+  pytest-app:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+      args:
+        - UID
+        - GID
+        - USERNAME=user
+        - GROUPNAME=user
+        - ARCHITECTURE=${PYTEST_APP_ARCHI:-arm64v8}
+        - TZ=${PYTEST_APP_TZ:-UTC}
+    image: pytest.try-except
+    container_name: pytest.try-except
+    restart: always
+    volumes:
+      - ./app:/opt/app
+      - ./docker/pyproject.toml:/opt/pyproject.toml
+      - ./docker/bashrc:/opt/home/.bashrc:ro
+    logging: *json-logging

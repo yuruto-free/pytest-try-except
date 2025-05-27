@@ -1,0 +1,44 @@
+[project]
+name = "app"
+version = "0.0.1"
+authors = [{ name="yuruto-free", email="103588113+yuruto-free@users.noreply.github.com" },]
+maintainers = [{ name="yuruto-free", email="103588113+yuruto-free@users.noreply.github.com" },]
+description = "Try-except test pattern in pytest"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.5"
+pytest-asyncio = "^0.26.0"
+pytest-cov = "^6.1.1"
+pytest-env = "^1.1.5"
+pytest-mock = "^3.14.0"
+pytest-randomly = "^3.16.0"
+mock = "^5.2.0"
+coverage = "^7.8.0"
+
+[tool.pytest_env]
+PYTHONPATH = "/opt/app"
+
+[tool.pytest.ini_options]
+addopts = "-vv --rootdir=/opt/app --cov=. --cov-report=xml --cov-report=html --cov-config=.coveragerc"
+testpaths = ["tests"]
+python_files = ["test_*.py", "tests.py", "*_test.py"]
+markers = [
+  "normal: mark tests as normal pattern",
+  "abnormal: mark tests as abnormal pattern",
+]
+cache_dir = "/opt/home/.cache"
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"
+asyncio_mode = "strict"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
