@@ -28,7 +28,7 @@ class Newton1d:
     return self._history
 
   def estimate(self, x0, max_iter=1024, threshold=1e-10, **kwargs):
-    x_old = x0
+    x_new = x_old = x0
     self._history = [self._store_class(iter=0, value=x0)]
 
     for idx in range(max_iter):

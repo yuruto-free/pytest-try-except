@@ -3,7 +3,7 @@ from .newton import Newton1d
 def calc_square(x, target=2):
   return (x - target) ** 2
 
-def main():
+if __name__ == '__main__':
   instance = Newton1d(calc_square)
   target = 3
   x0 = target + 1
@@ -16,6 +16,3 @@ def main():
   for store in histories:
     idx, val = store.get_pair()
     print(f'{idx:05d}: {val}')
-
-if __name__ == '__main__':
-  main()
